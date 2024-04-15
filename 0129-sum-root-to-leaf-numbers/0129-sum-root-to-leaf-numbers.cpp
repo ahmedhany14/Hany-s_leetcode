@@ -11,20 +11,20 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, string a, int& ret){
+    void dfs(TreeNode* root, int a, int& ret){
         if(!root -> left and !root -> right){
-            ret += stoi(a + char(root -> val + '0'));
+            ret += a * 10 + root -> val;
             return;
         }
         if(root -> left != NULL)
-            dfs(root -> left, a + char(root -> val + '0'), ret);
+            dfs(root -> left, a * 10 + root -> val, ret);
         if(root -> right != NULL)
-            dfs(root -> right, a + char(root -> val + '0'), ret);
+            dfs(root -> right, a * 10 + root -> val , ret);
     }
     
     int sumNumbers(TreeNode* root) {
         int ret = 0;
-        dfs(root, "", ret);
+        dfs(root,0, ret);
         return ret;
     }
 };
