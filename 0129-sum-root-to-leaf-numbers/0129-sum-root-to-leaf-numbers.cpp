@@ -11,22 +11,20 @@
  */
 class Solution {
 public:
-    vector<string> v;
-    void dfs(TreeNode* root, string a){
+    void dfs(TreeNode* root, string a, int& ret){
         if(!root -> left and !root -> right){
-            v.push_back(a + char(root -> val + '0'));
+            ret += stoi(a + char(root -> val + '0'));
             return;
         }
         if(root -> left != NULL)
-            dfs(root -> left, a + char(root -> val + '0'));
+            dfs(root -> left, a + char(root -> val + '0'), ret);
         if(root -> right != NULL)
-            dfs(root -> right, a + char(root -> val + '0'));
+            dfs(root -> right, a + char(root -> val + '0'), ret);
     }
     
     int sumNumbers(TreeNode* root) {
-        dfs(root, "");
         int ret = 0;
-        for(auto a : v) ret += stoi(a);
+        dfs(root, "", ret);
         return ret;
     }
 };
