@@ -1,17 +1,20 @@
 class Solution {
 public:
-    bool canSortArray(vector<int>& nums) {
-        
-        int n = nums.size();        
-        for(int k = 0;k < n; k++){
-            for(int i = 0;i < n; ++i){
-                for(int ii = i + 1;ii < n; ++ii){
-                    bitset<10> p(nums[i]), q(nums[ii]);
-                    if(p.count() == q.count() and nums[i] > nums[ii]) swap(nums[i], nums[ii]);
-                    else break;
-                }
-            }
+    bool canSortArray(vector<int> &nums) {
+        int n = nums.size();
+        for (int i = 0; i < n - 1; ++i) {
+            if(nums[i] <= nums[i + 1]) continue;
+            bitset<10> p(nums[i]), q(nums[i + 1]);
+            if (p.count() == q.count()) swap(nums[i], nums[i + 1]);
+            else return false;
         }
-        return is_sorted(nums.begin(), nums.end());
+        for (int i = n - 1; i > 0; --i) {
+            if(nums[i] >= nums[i - 1]) continue;
+            bitset<10> p(nums[i]), q(nums[i - 1]);
+            if (p.count() == q.count()) swap(nums[i], nums[i - 1]);
+            else return false;
+        }
+
+        return true;
     }
 };
