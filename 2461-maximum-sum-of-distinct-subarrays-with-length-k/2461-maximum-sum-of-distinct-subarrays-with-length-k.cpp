@@ -1,7 +1,7 @@
 class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
-        map<int,int> f;
+        unordered_map<int,int> f;
         vector<long long> prefix(nums.size() + 1, 0);
         for(int i = 0; i < nums.size(); ++i) {
             prefix[i + 1] = prefix[i] + nums[i];
