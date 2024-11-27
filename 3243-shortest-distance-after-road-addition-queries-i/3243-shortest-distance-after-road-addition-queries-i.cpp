@@ -4,7 +4,7 @@ public:
     int bfs(int n, vector<vector<int>> &adj){
         
 
-        priority_queue<pair<int, int>> q;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> q;
         vector<int>distance(n + 1, 1e9);
         q.push({0, 0});
         while(q.size()){
