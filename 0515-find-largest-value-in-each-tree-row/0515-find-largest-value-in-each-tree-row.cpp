@@ -20,22 +20,15 @@ public:
         return me;
     }
     
-    void dfs(TreeNode* root, int dep, vector<vector<int>>&depth){
+    void dfs(TreeNode* root, int dep, vector<int>&depth){
         if(root == NULL) return;
-        depth[dep].emplace_back(root->val);        
+        depth[dep - 1] = max(depth[dep - 1], root->val);
         dfs(root->right, dep + 1, depth);
         dfs(root->left, dep + 1, depth);
     }
     vector<int> largestValues(TreeNode* root) {
-        vector<vector<int>> depth (max_dep(root) + 2);
+        vector<int> depth (max_dep(root), -(1LL << 31));
         dfs(root, 1, depth);
-        vector<int> answer;        
-        for(int i = 1; i < depth.size(); ++i){
-            if(depth[i].size()){
-                int mx = *max_element(depth[i].begin(), depth[i].end());
-                answer.emplace_back(mx);
-            }
-        }
-        return answer;
+        return depth;
     }
 };
